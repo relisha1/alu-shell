@@ -1,5 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 # Display the process ID (PID) of the current script
 echo $$ 
-
