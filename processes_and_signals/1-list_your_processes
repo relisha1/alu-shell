@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
 # This script displays all currently running processes, including those without a TTY, in a user-oriented format, with process hierarchy.
 
-ps axjf
+ps -eo ppid,time,cmd --sort=ppid
 
