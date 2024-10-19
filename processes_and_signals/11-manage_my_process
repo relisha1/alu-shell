@@ -32,14 +32,14 @@ stop() {
 }
 
 restart() {
-  stop
+  # Stop and start the process, but only print the "restarted" message.
+  stop &> /dev/null
   sleep 1  # Ensure the old process is stopped.
-  start
+  start &> /dev/null
   echo "manage_my_process restarted"
 }
 
 usage() {
-  # Ensure the output matches exactly with the expected output.
   echo "Usage: manage_my_process {start|stop|restart}"
   exit 1
 }
