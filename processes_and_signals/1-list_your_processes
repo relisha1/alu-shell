@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# This script displays all currently running processes, including those without a TTY, in a user-oriented format, with process hierarchy.
+# This script displays a list of all running processes in a user-oriented format, including process hierarchy.
 
-ps -eo ppid,time,cmd --sort=ppid
+ps -auxf
 
