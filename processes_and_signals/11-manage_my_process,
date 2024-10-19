@@ -1,0 +1,47 @@
+#!/usr/bin/env bash
+# This script manages the manage_my_process script.
+
+PID_FILE="/var/run/my_process.pid"
+PROCESS_SCRIPT="./manage_my_process"
+
+start() {
+  if [ -f "$PID_FILE" ]; then
+    echo "Process is already running!"
+    exit 1
+  fi
+
+  # Start the manage_my_process in the background and save its PID.
+  nohup "$PROCESS_SCRIPT" &> /dev/null &
+  echo $! > "$PID_FILE"
+  echo "manage_my_process started"
+}
+
+stop() {
+  if [ -f "$PID_FILE" ]; then
+    kill "$(cat "$PID_FILE")"
+    rm -f "$PID_FILE"
+    echo "manage_my_process stopped"
+  else
+    echo "No process to stop"
+  fi
+}
+
+restart() {
+  stop
+  start
+  echo "manage_my_process restarted"
+}
+
+usage() {
+  echo "Usage: $0 {start|stop|restart}"
+  exit 1
+}
+
+# Main logic to handle arguments.
+case "$1" in
+  start) start ;;
+  stop) stop ;;
+  restart) restart ;;
+  *) usage ;;
+esac
+
